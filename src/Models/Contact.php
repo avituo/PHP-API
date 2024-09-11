@@ -3,56 +3,40 @@
 namespace Src\Models;
 
 class Contact {
-    private $id;
-    private $user_id;
-    private $type;
-    private $value;
+    public $id;
+    public $user_id;
+    public $type;
+    public $value;
 
-    public function __construct($id, $user_id, $type, $value)
-    {
-        $this->id = $id;
-        $this->user_id = $user_id;
-        $this->type = $type;
-        $this->value = $value;
-    }
-
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
-    public function setId($id): void
-    {
+    public function setId($id): void {
         $this->id = $id;
     }
 
-    public function getUserId()
-    {
+    public function getUserId() {
         return $this->user_id;
     }
 
-    public function setUserId($user_id): void
-    {
+    public function setUserId($user_id): void {
         $this->user_id = $user_id;
     }
 
-    public function getType()
-    {
+    public function getType() {
         return $this->type;
     }
 
-    public function setType($type): void
-    {
+    public function setType($type): void {
         $this->type = $type;
     }
 
-    public function getValue()
-    {
+    public function getValue() {
         return $this->value;
     }
 
-    public function setValue($value): void
-    {
+    public function setValue($value): void {
         $this->value = $value;
     }
 

@@ -19,10 +19,18 @@ class ContactDAO {
         return $stmt->fetchAll(PDO::FETCH_CLASS, Contact::class);
     }
 
-    public function getByUserId($userId) {
-        $query = $this->db->prepare("SELECT * FROM contacts WHERE user_id = :userId");
+    public function getById($id) {
+        $query = "SELECT * FROM contacts WHERE id = :id";
         $stmt = $this->db->prepare($query);
-        $stmt->execute(["user_id" => $userId]);
+        $stmt->execute(['id' => $id]);
+        $stmt->setFetchMode(PDO::FETCH_CLASS, Contact::class);
+        return $stmt->fetch();
+    }
+
+    public function getByUserId($userId) {
+        $query = "SELECT * FROM contacts WHERE user_id = :userId";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute(['userId' => $userId]);
         return $stmt->fetchAll(PDO::FETCH_CLASS, Contact::class);
     }
 

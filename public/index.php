@@ -48,7 +48,7 @@ $router->get('/contacts', function () {
 
 $router->get('/contacts/user/{user_id}', function ($user_id) {
     $controller = new ContactController();
-    $controller->getByUser($user_id);
+    $controller->getByUserId($user_id);
 });
 
 $router->post('/contacts', function () {
