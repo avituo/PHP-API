@@ -14,10 +14,10 @@ class Database {
     private $password;
 
     private function __construct() {
-        $this->host = $_ENV['DB_HOST'];
-        $this->dbname = $_ENV['DB_NAME'];
-        $this->username = $_ENV['DB_USER'];
-        $this->password = $_ENV['DB_PASS'];
+        $this->host = '127.0.0.1';
+        $this->dbname = 'api_ileva';
+        $this->username = 'root';
+        $this->password = '';
 
         try {
             $dsn = "mysql:host=$this->host;dbname=$this->dbname";

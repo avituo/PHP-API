@@ -9,13 +9,13 @@ use PDO;
 class UserDAO {
     private $db;
 
-    public function __construct($db) {
+    public function __construct() {
         $this->db = Database::getInstance()->getConn();
     }
 
     public function getAll() {
         $query = "SELECT * FROM users";
-        $stmt = $this->db->prepare($query);
+        $stmt = $this->db->query($query);
         return $stmt->fetchAll(PDO::FETCH_CLASS, Users::class);
     }
 
