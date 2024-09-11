@@ -14,7 +14,7 @@ class ContactDAO {
     }
 
     public function getAll() {
-        $query = $this->db->prepare("SELECT * FROM contacts");
+        $query = "SELECT * FROM contacts";
         $stmt = $this->db->query($query);
         return $stmt->fetchAll(PDO::FETCH_CLASS, Contact::class);
     }
