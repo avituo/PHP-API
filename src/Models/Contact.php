@@ -2,7 +2,7 @@
 
 namespace Src\Models;
 
-class Contacts {
+class Contact {
     private $id;
     private $user_id;
     private $type;

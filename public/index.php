@@ -2,11 +2,19 @@
 
 require_once '../vendor/autoload.php';
 
+use Dotenv\Dotenv;
 use Src\Core\Router;
 use Src\Controllers\UserController;
 use Src\Controllers\ContactController;
 
+$dotenv = Dotenv::createImmutable(__DIR__ . '/../');
+$dotenv->load();
+
 $router = new Router();
+
+$router->get('/', function () {
+    echo 'A api está online';
+});
 
 $router->get('/users', function () {
     $controller = new UserController();
@@ -33,7 +41,6 @@ $router->delete('/users/{id}', function ($id) {
     $controller->delete($id);
 });
 
-// Rotas para Contacts
 $router->get('/contacts', function () {
     $controller = new ContactController();
     $controller->getAll();
@@ -59,6 +66,5 @@ $router->delete('/contacts/{id}', function ($id) {
     $controller->delete($id);
 });
 
-// Processar a requisição
 $router->run();
 

@@ -2,9 +2,9 @@
 
 namespace Src\Models;
 
-class Users {
-    private $id;
-    private $name;
+class User {
+    public $id;
+    public $name;
 
     public function getId() {
         return $this->id;

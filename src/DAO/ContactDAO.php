@@ -4,7 +4,7 @@ namespace Src\DAO;
 
 use PDO;
 use Src\Core\Database;
-use Src\Models\Contacts;
+use Src\Models\Contact;
 
 class ContactDAO {
     private $db;
@@ -16,17 +16,17 @@ class ContactDAO {
     public function getAll() {
         $query = $this->db->prepare("SELECT * FROM contacts");
         $stmt = $this->db->query($query);
-        return $stmt->fetchAll(PDO::FETCH_CLASS, Contacts::class);
+        return $stmt->fetchAll(PDO::FETCH_CLASS, Contact::class);
     }
 
     public function getByUserId($userId) {
         $query = $this->db->prepare("SELECT * FROM contacts WHERE user_id = :userId");
         $stmt = $this->db->prepare($query);
         $stmt->execute(["user_id" => $userId]);
-        return $stmt->fetchAll(PDO::FETCH_CLASS, Contacts::class);
+        return $stmt->fetchAll(PDO::FETCH_CLASS, Contact::class);
     }
 
-    public function create(Contacts $contact) {
+    public function create(Contact $contact) {
         $query = ("INSERT INTO contacts (user_id, type, value) VALUES (:userId, :type, :value)");
         $stmt = $this->db->prepare($query);
         $stmt->execute(["userId" => $contact->getUserId(), "type" => $contact->getType(), "value" => $contact->getValue()]);
@@ -34,14 +34,14 @@ class ContactDAO {
         return $contact;
     }
 
-    public function update(Contacts $contact) {
+    public function update(Contact $contact) {
         $query = ("UPDATE contacts SET type = :type, value = :value WHERE id = :id");
         $stmt = $this->db->prepare($query);
         $stmt->execute(["id" => $contact->getId(), "type" => $contact->getType(), "value" => $contact->getValue()]);
         return $contact;
     }
 
-    public function delete(Contacts $contact) {
+    public function delete(Contact $contact) {
         $query = ("DELETE FROM contacts WHERE id = :id");
         $stmt = $this->db->prepare($query);
         return $stmt->execute(["id" => $contact->getId()]);
