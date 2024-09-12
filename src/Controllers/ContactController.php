@@ -4,6 +4,7 @@ namespace Src\Controllers;
 
 use Src\DAO\ContactDAO;
 use Src\Models\Contact;
+use Src\Models\User;
 
 class ContactController {
     private $contactDAO;
@@ -17,19 +18,30 @@ class ContactController {
         echo json_encode($contacts);
     }
 
+    public function getById($id) {
+        $contact = $this->contactDAO->getById($id);
+        if ($contact) {
+            echo json_encode($contact);
+        } else {
+            echo json_encode(['Erro:' => 'Contato nao encontrado']);
+        }
+    }
+
     public function getByUserId($id) {
         $contacts = $this->contactDAO->getByUserId($id);
         echo json_encode($contacts);
     }
 
     public function create($data) {
+
+
         $contactData = json_decode($data, true);
         $contact = new Contact();
         $contact->setUserId($contactData['user_id']);
         $contact->setType($contactData['type']);
         $contact->setValue($contactData['value']);
         $contact = $this->contactDAO->create($contact);
-        echo json_encode($contact);
+        echo json_encode(['Sucesso:' => 'Contato de Id: "' . $contact->getId() . '" cadastrado com sucesso']);
     }
 
     public function update($id, $data) {
@@ -39,20 +51,21 @@ class ContactController {
             $contact->setType($contactData['type']);
             $contact->setValue($contactData['value']);
             $contact = $this->contactDAO->update($contact);
-            echo json_encode($contact);
+            echo json_encode(['Sucesso:' => 'Contato de Id: "' . $contact->getId() . '" atualizado com sucesso']);
         } else {
             http_response_code(404);
-            echo json_encode(['Erro: ' => 'Contato não encontrado']);
+            echo json_encode(['Erro:' => 'Contato nao encontrado']);
         }
     }
 
     public function delete($id) {
         $contact = $this->contactDAO->getById($id);
         if ($contact) {
-            $contact = $this->contactDAO->delete($contact);
+            $this->contactDAO->delete($id);
+            echo json_encode(['Sucesso' => 'Contato apagado']);
         } else {
             http_response_code(404);
-            echo json_encode(['Erro: ' => 'Contato não encontrado']);
+            echo json_encode(['Erro:' => 'Contato nao encontrado']);
         }
     }
 }

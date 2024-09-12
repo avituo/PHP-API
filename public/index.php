@@ -46,6 +46,11 @@ $router->get('/contacts', function () {
     $controller->getAll();
 });
 
+$router->get('/contacts/{id}', function ($id) {
+    $controller = new ContactController();
+    $controller->getById($id);
+});
+
 $router->get('/contacts/user/{user_id}', function ($user_id) {
     $controller = new ContactController();
     $controller->getByUserId($user_id);

@@ -49,9 +49,9 @@ class ContactDAO {
         return $contact;
     }
 
-    public function delete(Contact $contact) {
+    public function delete($id) {
         $query = ("DELETE FROM contacts WHERE id = :id");
         $stmt = $this->db->prepare($query);
-        return $stmt->execute(["id" => $contact->getId()]);
+        $stmt->execute(["id" => $id]);
     }
 }
