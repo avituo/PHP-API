@@ -33,8 +33,6 @@ class ContactController {
     }
 
     public function create($data) {
-
-
         $contactData = json_decode($data, true);
         $contact = new Contact();
         $contact->setUserId($contactData['user_id']);

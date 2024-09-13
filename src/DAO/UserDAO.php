@@ -44,8 +44,12 @@ class UserDAO {
     }
 
     public function delete($id) {
-        $query = "DELETE FROM users WHERE id = :id";
-        $stmt = $this->db->prepare($query);
-        $stmt->execute([":id" => $id]);
+        $queryContacts = "DELETE FROM contacts WHERE user_id = :id";
+        $stmtContacts = $this->db->prepare($queryContacts);
+        $stmtContacts->execute([":id" => $id]);
+
+        $queryUsers = "DELETE FROM users WHERE id = :id";
+        $stmtUsers = $this->db->prepare($queryUsers);
+        $stmtUsers->execute([":id" => $id]);
     }
 }
