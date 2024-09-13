@@ -1,6 +1,6 @@
 <?php
 
-require_once '../vendor/autoload.php';
+require_once 'vendor/autoload.php';
 
 use Dotenv\Dotenv;
 use Src\Core\Router;
@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 
 
 
-$dotenv = Dotenv::createImmutable(__DIR__ . '/../');
+$dotenv = Dotenv::createImmutable(__DIR__ . '/');
 $dotenv->load();
 
 $router = new Router();
