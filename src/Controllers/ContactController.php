@@ -14,11 +14,13 @@ class ContactController {
     }
 
     public function getAll() {
+        header('Content-Type: application/json');
         $contacts = $this->contactDAO->getAll();
         echo json_encode($contacts);
     }
 
     public function getById($id) {
+        header('Content-Type: application/json');
         $contact = $this->contactDAO->getById($id);
         if ($contact) {
             echo json_encode($contact);
@@ -28,11 +30,13 @@ class ContactController {
     }
 
     public function getByUserId($id) {
+        header('Content-Type: application/json');
         $contacts = $this->contactDAO->getByUserId($id);
         echo json_encode($contacts);
     }
 
     public function create($data) {
+        header('Content-Type: application/json');
         $contactData = json_decode($data, true);
         $contact = new Contact();
         $contact->setUserId($contactData['user_id']);
@@ -43,6 +47,7 @@ class ContactController {
     }
 
     public function update($id, $data) {
+        header('Content-Type: application/json');
         $contactData = json_decode($data, true);
         $contact = $this->contactDAO->getById($id);
         if ($contact) {
@@ -57,6 +62,7 @@ class ContactController {
     }
 
     public function delete($id) {
+        header('Content-Type: application/json');
         $contact = $this->contactDAO->getById($id);
         if ($contact) {
             $this->contactDAO->delete($id);
