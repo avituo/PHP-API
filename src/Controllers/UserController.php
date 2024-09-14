@@ -38,15 +38,17 @@ class UserController {
     public function update($id, $data) {
         $userData = json_decode($data, true);
         $user = $this->userDAO->getById($id);
+
         if ($user) {
             $user->setName($userData['name']);
             $user = $this->userDAO->update($user);
             echo json_encode($user);
         } else {
             http_response_code(404);
-            echo json_encode(array("Erro" => "Usuario nao encontrado."));
+            echo json_encode(array("Erro" => "Usuário não encontrado."));
         }
     }
+
 
     public function delete($id) {
         $user = $this->userDAO->getById($id);

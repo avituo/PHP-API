@@ -27,28 +27,28 @@ class UserDAO {
 
         $stmt = $this->db->prepare($query);
         $stmt->execute([":id" => $id]);
-        $results = $stmt->FetchAll(PDO::FETCH_ASSOC);
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         if ($results) {
-            $user = [
-                'id' => $results[0]['user_id'],
-                'name' => $results[0]['user_name'],
-                'contacts' => []
-            ];
-
+            $user = new User();
+            $user->setId($results[0]['user_id']);
+            $user->setName($results[0]['user_name']);
+            $contacts = [];
             foreach ($results as $row) {
                 if ($row['contact_id']) {
-                    $user['contacts'][] = [
+                    $contacts[] = [
                         'id' => $row['contact_id'],
                         'type' => $row['contact_type'],
                         'value' => $row['contact_value']
                     ];
                 }
             }
+            $user->setContacts($contacts);
             return $user;
         }
         return null;
     }
+
 
     public function create(User $user) {
         $query = "INSERT INTO users (name) VALUES (:name)";
